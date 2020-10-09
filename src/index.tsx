@@ -1,1 +1,1 @@
-export { default as MTVButton } from './button/button.comp';
+export { default as MTVButton } from './atoms/button/button.comp';
