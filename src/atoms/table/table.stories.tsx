@@ -12,47 +12,8 @@ export default {
   }
 } as Meta;
 
-const Template: Story<any> = (args) => <MTVTable {...args} />;
-
-export const Primary = Template.bind({});
-Primary.args = {
-  columns: [
-    {
-      Header: 'Name',
-      columns: [
-        {
-          Header: 'First Name',
-          accessor: 'firstName'
-        },
-        {
-          Header: 'Last Name',
-          accessor: 'lastName'
-        }
-      ]
-    },
-    {
-      Header: 'Info',
-      columns: [
-        {
-          Header: 'Age',
-          accessor: 'age'
-        },
-        {
-          Header: 'Visits',
-          accessor: 'visits'
-        },
-        {
-          Header: 'Status',
-          accessor: 'status'
-        },
-        {
-          Header: 'Profile Progress',
-          accessor: 'progress'
-        }
-      ]
-    }
-  ],
-  data: [
+const Template: Story<any> = (args) => {
+  const [data, setData] = React.useState([
     {
       firstName: 'attraction',
       lastName: 'fairies',
@@ -212,6 +173,63 @@ Primary.args = {
       visits: 29,
       progress: 49,
       status: 'complicated'
+    }
+  ]);
+
+  const handleEdit = (rowIndex: any, columnId: any, value: any) => {
+    // We also turn on the flag to not reset the page
+    console.log('edit');
+    setData((old) =>
+      old.map((row, index) => {
+        if (index === rowIndex) {
+          return {
+            ...old[rowIndex],
+            [columnId]: value
+          };
+        }
+        return row;
+      })
+    );
+  };
+  return <MTVTable {...args} data={data} onEdit={handleEdit} />;
+};
+
+export const Primary = Template.bind({});
+Primary.args = {
+  columns: [
+    {
+      Header: 'Name',
+      columns: [
+        {
+          Header: 'First Name',
+          accessor: 'firstName'
+        },
+        {
+          Header: 'Last Name',
+          accessor: 'lastName'
+        }
+      ]
+    },
+    {
+      Header: 'Info',
+      columns: [
+        {
+          Header: 'Age',
+          accessor: 'age'
+        },
+        {
+          Header: 'Visits',
+          accessor: 'visits'
+        },
+        {
+          Header: 'Status',
+          accessor: 'status'
+        },
+        {
+          Header: 'Profile Progress',
+          accessor: 'progress'
+        }
+      ]
     }
   ]
 };
