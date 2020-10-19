@@ -24,7 +24,10 @@ export default function MTVTable({
     data,
     defaultColumn: editable ? editableColumn : undefined,
     autoResetPage: false,
-    onEdit
+    onEdit,
+    initialState: {
+      hiddenColumns: ['id']
+    }
   });
 
   // Render the UI for your table

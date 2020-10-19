@@ -1,10 +1,10 @@
-import React, { KeyboardEventHandler, useEffect } from 'react';
+import React, { KeyboardEventHandler } from 'react';
 import { useForm } from 'react-hook-form';
 
 // Create an editable cell renderer
 const EditableCell = ({
   value: initialValue,
-  row: { index },
+  row: { values },
   column: { id },
   onEdit // This is a custom function that we supplied to our table instance
 }: any) => {
@@ -24,14 +24,14 @@ const EditableCell = ({
   // We'll only update the external data when the input is blurred
   const onBlur = () => {
     setShowInput(false);
-    onEdit(index, id, getValues('cell'));
+    onEdit(values, id, getValues('cell'));
   };
 
   const onKeyDown: KeyboardEventHandler = (e) => {
     console.log(errors);
     if (e.key === 'Enter' || e.key === 'Escape') {
       setShowInput(false);
-      e.key === 'Escape' || onEdit(index, id, getValues('cell'));
+      e.key === 'Escape' || onEdit(values, id, getValues('cell'));
     }
   };
 

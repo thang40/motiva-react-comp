@@ -178,7 +178,7 @@ const Template: Story<any> = (args) => {
 
   const handleEdit = (rowIndex: any, columnId: any, value: any) => {
     // We also turn on the flag to not reset the page
-    console.log('edit');
+    console.log(rowIndex);
     setData((old) =>
       old.map((row, index) => {
         if (index === rowIndex) {
